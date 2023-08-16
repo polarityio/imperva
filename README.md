@@ -2,7 +2,7 @@
 
 The Polarity - Imperva integration searches the Imperva IP reputation API to provide reputation insights quickly to analysts. 
 
-## Stairwell Inception Integration Options
+## Imperva Integration Options
 
 ### Imperva API ID 
 
