@@ -1,46 +1,34 @@
 {
-    "name": "Imperva",
-    "acronym": "IMP",
-    "defaultColor": "light-gray",
-    "description": "The Imperva Reputation Intelligences allows for analysts to gain visibility into the reputation of the IPs attacking your sites to make more informed, data-driven decisions.",
-    "entityTypes": ["IPv4"],
-    "block": {
-      "component": {
-        "file": "./components/block.js"
-      },
-      "template": {
-        "file": "./templates/block.hbs"
-      }
+  "name": "Imperva",
+  "acronym": "IMP",
+  "description": "The Imperva Reputation Intelligences allows for analysts to gain visibility into the reputation of the IPs attacking your sites to make more informed, data-driven decisions.",
+  "entityTypes": ["IPv4"],
+  "defaultColor": "light-gray",
+  "styles": ["./styles/styles.less"],
+  "block": {
+    "component": { "file": "./components/block.js" },
+    "template": { "file": "./templates/block.hbs" }
+  },
+  "request": { "cert": "", "key": "", "passphrase": "", "ca": "", "proxy": "" },
+  "logging": { "level": "info" },
+  "options": [
+    {
+      "key": "apiId",
+      "name": "API ID",
+      "description": "Imeperva API ID",
+      "default": "",
+      "type": "password",
+      "userCanEdit": true,
+      "adminOnly": false
     },
-    "request": {
-      "cert": "",
-      "key": "",
-      "passphrase": "",
-      "ca": "",
-      "proxy": ""
-    },
-    "logging": {
-      "level": "trace"
-    },
-    "onDemandOnly": true,
-    "options": [
-      {
-            "key": "apiID",
-            "name": "Stairwell Inception URL",
-            "description": "Imeperva API ID",
-            "default": "",
-            "type": "password",
-            "userCanEdit": true,
-            "adminOnly": false
-      },
-      {
-        "key": "apiKey",
-        "name": "API Key",
-        "description": "Imeperva API Key",
-        "default": "",
-        "type": "password",
-        "userCanEdit": true,
-        "adminOnly": false
-      }
-    ]
-  }
+    {
+      "key": "apiKey",
+      "name": "API Key",
+      "description": "Imperva API Key",
+      "default": "",
+      "type": "password",
+      "userCanEdit": true,
+      "adminOnly": false
+    }
+  ]
+}

@@ -26,6 +26,7 @@ module.exports = {
     'The Imperva Reputation Intelligences allows for analysts to gain visibility into the reputation of the IPs attacking your sites to make more informed, data-driven decisions.',
   entityTypes: ['IPv4'],
   defaultColor: 'light-gray',
+  styles: ['./styles/styles.less'],
   /**
    * Provide custom component logic and template for rendering the integration details block.  If you do not
    * provide a custom template and/or component then the integration will display data as a table of key value
@@ -60,7 +61,7 @@ module.exports = {
     proxy: ''
   },
   logging: {
-    level: 'trace' //trace, debug, info, warn, error, fatal
+    level: 'info' //trace, debug, info, warn, error, fatal
   },
   /**
    * Options that are displayed to the user/admin in the Polarity integration user-interface.  Should be structured
@@ -71,7 +72,7 @@ module.exports = {
    */
   options: [
     {
-      key: 'apiID',
+      key: 'apiId',
       name: 'API ID',
       description: 'Imeperva API ID',
       default: '',
