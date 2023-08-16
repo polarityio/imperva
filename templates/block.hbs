@@ -1,0 +1,56 @@
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} IP Reputation Details
+  </h1>
+    
+    {{#if details.known_for}}
+    <div>
+        <span class="p-key">Best Known For: </span>
+        <span class="p-value">{{details.known_for}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.known_to_use}}
+    <div>
+        <span class="p-key">Known To Use: </span>
+        <span class="p-value">{{details.known_to_use}}</span>
+    </div>
+  {{/if}}
+
+
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} IP Location Info
+  </h1>
+    
+    {{#if details.origin.country}}
+    <div>
+        <span class="p-key">IP Country: </span>
+        <span class="p-value">{{details.origin.country}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.origin.city}}
+    <div>
+        <span class="p-key">IP City: </span>
+        <span class="p-value">{{details.origin.city}}</span>
+    </div>
+  {{/if}}
+
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} ASN Details
+  </h1>
+
+
+   {{#if details.asn.organization_name}}
+    <div>
+        <span class="p-key">ASN ORG Name: </span>
+        <span class="p-value">{{details.asn.organization_name}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.asn.organization_number}}
+    <div>
+        <span class="p-key">ASN ORG Name: </span>
+        <span class="p-value">{{details.asn.organization_number}}</span>
+    </div>
+  {{/if}}
+
