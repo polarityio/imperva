@@ -9,13 +9,6 @@ const mapObj = require('lodash/fp/map').convert({ cap: false });
 let Logger;
 let requestDefault;
 
-/* 
-8.8.8.8
-133.167.35.116
-30.0.0.21
-113.196.70.169
-192.42.116.18
-*/
 /**
  *
  * @param entities
