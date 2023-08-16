@@ -113,7 +113,7 @@ function getSummaryTags(result) {
   const tags = [];
 
   const knownFor = get(
-    'known_for',
+    'risk_score.risk_score',
     result
   );
   if (knownFor) tags.push(knownFor);

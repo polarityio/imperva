@@ -16,6 +16,76 @@
     </div>
   {{/if}}
 
+  {{#if details.risk_score.risk_score}}
+    <div>
+        <span class="p-key">Risk Score: </span>
+        <span class="p-value">{{details.risk_score.risk_score}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.risk_score.risk_score_number}}
+    <div>
+        <span class="p-key">Risk Value: </span>
+        <span class="p-value">{{details.risk_score.risk_score_number}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.risk_score.risk_description}}
+    <div>
+        <span class="p-key">Risk Description: </span>
+        <span class="p-value">{{details.risk_score.risk_description}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.requests}}
+    <div>
+        <span class="p-key">Number of Requests: </span>
+        <span class="p-value">{{details.requests}}</span>
+    </div>
+  {{/if}}
+
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} Violations
+  </h1>
+
+
+  {{#if details.violations}}
+    <div>
+        <span class="p-key">Violations: </span>
+        <span class="p-value">{{details.violations}}</span>
+    </div>
+  {{/if}}
+
+  {{#if details.violations_over_time}}
+    <div>
+        <span class="p-key">Violations Over Time: </span>
+        <span class="p-value">{{details.violations_over_time}}</span>
+    </div>
+  {{/if}}
+
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} Client Applications
+  </h1>
+
+  {{#if details.client_application_details}}
+    <div>
+        <span class="p-key">Client Application Details : </span>
+        <span class="p-value">{{details.client_application_details}}</span>
+    </div>
+  {{/if}}
+
+  <h1 class="p-title">
+    {{fa-icon "eye" fixedWidth=true}} Attacks by Industry
+  </h1>
+
+  {{#if details.attacks_by_industries}}
+    <div>
+        <span class="p-key">Attacks by Industry: </span>
+        <span class="p-value">{{details.attacks_by_industries}}</span>
+    </div>
+  {{/if}}
+
+
 
   <h1 class="p-title">
     {{fa-icon "eye" fixedWidth=true}} IP Location Info
