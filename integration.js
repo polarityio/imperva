@@ -3,7 +3,8 @@ const request = require('postman-request');
 const config = require('./config/config');
 const async = require('async');
 const fs = require('fs');
-const { get } = require('lodash/fp');
+const { get, toInteger, flow, fromPairs, size } = require('lodash/fp');
+const mapObj = require('lodash/fp/map').convert({ cap: false });
 
 let Logger;
 let requestDefault;
@@ -15,8 +16,6 @@ let requestDefault;
  * @param cb
  */
 
-let previousDomainRegexAsString = '';
-
 function doLookup(entities, options, cb) {
   let lookupResults = [];
   let tasks = [];
@@ -27,15 +26,19 @@ function doLookup(entities, options, cb) {
     //do the lookup
     let requestOptions = {
       method: 'GET',
-      uri: `https://api.imperva.com/ip-reputation/v1/reputation?ip` + entity.value,
+      url: 'https://api.imperva.com/ip-reputation/v1/reputation',
+      qs: {
+        ip: entity.value
+      },
       headers: {
+        accept: 'application/json',
         'x-API-Id': options.apiId,
         'x-API-Key': options.apiKey
       },
       json: true
     };
 
-    Logger.debug({ uri: requestOptions }, 'Request URI');
+    Logger.debug({ requestOptions }, 'Request Options');
 
     tasks.push(function (done) {
       requestDefault(requestOptions, function (error, res, body) {
@@ -91,12 +94,23 @@ function doLookup(entities, options, cb) {
           data: null
         });
       } else {
+        const violations_over_time = flow(
+          get('body.violations_over_time'),
+          mapObj((value, key) => [
+            key,
+            flow(
+              mapObj((occurrences, date) => [toInteger(date), occurrences]),
+            )(value)
+          ]),
+          fromPairs
+        )(result);
         lookupResults.push({
           entity: result.entity,
           data: {
             summary: getSummaryTags(result.body),
             details: {
-              ...result.body
+              ...result.body,
+              ...(size(violations_over_time) && {violations_over_time} )
             }
           }
         });
@@ -112,11 +126,10 @@ function doLookup(entities, options, cb) {
 function getSummaryTags(result) {
   const tags = [];
 
-  const knownFor = get(
-    'risk_score.risk_score',
-    result
-  );
+  const knownFor = get('risk.risk_score', result);
   if (knownFor) tags.push(knownFor);
+  const orgName = get('asn.organization_name', result);
+  if (orgName) tags.push(orgName);
 
   return tags;
 }

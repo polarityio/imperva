@@ -1,126 +1,290 @@
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} IP Reputation Details
-  </h1>
-    
+{{#if
+  (or
+    details.known_for
+    details.known_to_use
+    details.risk_score.risk_score
+    details.risk_score.risk_score_number
+    details.risk_score.risk_description
+    details.requests
+  )
+}}
+  <div class="rep-details">
+
+    <h1 class="p-title">
+      {{fa-icon "question" fixedWidth=true}}
+      IP Reputation Details
+    </h1>
+
     {{#if details.known_for}}
-    <div>
+      <div>
         <span class="p-key">Best Known For: </span>
         <span class="p-value">{{details.known_for}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.known_to_use}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.known_to_use}}
+      <div>
         <span class="p-key">Known To Use: </span>
         <span class="p-value">{{details.known_to_use}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.risk_score.risk_score}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.risk_score.risk_score}}
+      <div>
         <span class="p-key">Risk Score: </span>
         <span class="p-value">{{details.risk_score.risk_score}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.risk_score.risk_score_number}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.risk_score.risk_score_number}}
+      <div>
         <span class="p-key">Risk Value: </span>
         <span class="p-value">{{details.risk_score.risk_score_number}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.risk_score.risk_description}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.risk_score.risk_description}}
+      <div>
         <span class="p-key">Risk Description: </span>
         <span class="p-value">{{details.risk_score.risk_description}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.requests}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.requests}}
+      <div>
         <span class="p-key">Number of Requests: </span>
         <span class="p-value">{{details.requests}}</span>
-    </div>
-  {{/if}}
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
 
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} Violations
-  </h1>
+{{#if (or details.origin.country details.origin.city)}}
+  <div class="ip-location-info">
+    <h1 class="p-title">
+      {{fa-icon "location-arrow" fixedWidth=true}}
+      IP Location Info
+    </h1>
 
-
-  {{#if details.violations}}
-    <div>
-        <span class="p-key">Violations: </span>
-        <span class="p-value">{{details.violations}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.violations_over_time}}
-    <div>
-        <span class="p-key">Violations Over Time: </span>
-        <span class="p-value">{{details.violations_over_time}}</span>
-    </div>
-  {{/if}}
-
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} Client Applications
-  </h1>
-
-  {{#if details.client_application_details}}
-    <div>
-        <span class="p-key">Client Application Details : </span>
-        <span class="p-value">{{details.client_application_details}}</span>
-    </div>
-  {{/if}}
-
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} Attacks by Industry
-  </h1>
-
-  {{#if details.attacks_by_industries}}
-    <div>
-        <span class="p-key">Attacks by Industry: </span>
-        <span class="p-value">{{details.attacks_by_industries}}</span>
-    </div>
-  {{/if}}
-
-
-
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} IP Location Info
-  </h1>
-    
     {{#if details.origin.country}}
-    <div>
+      <div>
         <span class="p-key">IP Country: </span>
         <span class="p-value">{{details.origin.country}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.origin.city}}
-    <div>
+      </div>
+    {{/if}}
+    {{#if details.origin.city}}
+      <div>
         <span class="p-key">IP City: </span>
         <span class="p-value">{{details.origin.city}}</span>
-    </div>
-  {{/if}}
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
+{{#if (or details.asn.organization_name details.asn.organization_number)}}
+  <div class="asn-details">
+    <h1 class="p-title">
+      {{fa-icon "hat-cowboy" fixedWidth=true}}
+      ASN Details
+    </h1>
 
-  <h1 class="p-title">
-    {{fa-icon "eye" fixedWidth=true}} ASN Details
-  </h1>
-
-
-   {{#if details.asn.organization_name}}
-    <div>
+    {{#if details.asn.organization_name}}
+      <div>
         <span class="p-key">ASN ORG Name: </span>
         <span class="p-value">{{details.asn.organization_name}}</span>
-    </div>
-  {{/if}}
-
-  {{#if details.asn.organization_number}}
-    <div>
-        <span class="p-key">ASN ORG Name: </span>
+      </div>
+    {{/if}}
+    {{#if details.asn.organization_number}}
+      <div>
+        <span class="p-key">ASN ORG Number: </span>
         <span class="p-value">{{details.asn.organization_number}}</span>
-    </div>
-  {{/if}}
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
 
+{{#if details.client_application}}
+  <div class="client_application">
+    <h1 class="p-title">
+      {{fa-icon "eye" fixedWidth=true}}
+      Client Applications
+    </h1>
+
+    {{#each-in details.client_application as |name percentage|}}
+      <div>
+        <span class="p-key">{{name}}:</span>
+        <span class="p-value">{{percentage}}</span>
+      </div>
+    {{/each-in}}
+  </div>
+{{/if}}
+
+{{#if (or details.risk.risk_score details.risk.risk_description details.risk.risk_score_number)}}
+  <div class="risk-details">
+    <h1 class="p-title">
+      {{fa-icon "asterisk" fixedWidth=true}}
+      Risk Details
+    </h1>
+
+    {{#if details.risk.risk_score}}
+      <div>
+        <span class="p-key">Score: </span>
+        <span class="p-value">{{details.risk.risk_score}}</span>
+      </div>
+    {{/if}}
+    {{#if details.risk.risk_description}}
+      <div>
+        <span class="p-key">Description: </span>
+        <span class="p-value">{{details.risk.risk_description}}</span>
+      </div>
+    {{/if}}
+    {{#if details.risk.risk_score_number}}
+      <div>
+        <span class="p-key">Score Number: </span>
+        <span class="p-value">{{details.risk.risk_score_number}}</span>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
+
+{{#if details.violations}}
+  {{#if (get expandableTitleStates (concat "violations" index))}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on "click" (action "toggleExpandableTitle" (concat "violations" index))}}
+    >
+      <span class="text">Violations</span>
+      {{fa-icon "angle-up"}}
+    </a>
+    <div class="violations">
+      {{#each-in details.violations as |name percentage|}}
+        <div>
+          <span class="p-key">{{name}}:</span>
+          <span class="p-value">{{percentage}}</span>
+        </div>
+      {{/each-in}}
+    </div>
+  {{else}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on "click" (action "toggleExpandableTitle" (concat "violations" index))}}
+    >
+      <span class="text">Violations</span>
+      {{fa-icon "angle-down"}}
+    </a>
+  {{/if}}
+{{/if}}
+
+{{#if details.violations_over_time}}
+  {{#if (get expandableTitleStates (concat "violations_over_time" index))}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on
+        "click"
+        (action "toggleExpandableTitle" (concat "violations_over_time" index))
+      }}
+    >
+      <span class="text">Violations Time Logs</span>
+      {{fa-icon "angle-up"}}
+    </a>
+    <div class="violations_over_time">
+      {{#each-in details.violations_over_time as |title values|}}
+        <h2 class="mt-2">{{title}}</h2>
+        {{#each values as |value|}}
+          <div class="mb-1">
+            <div>
+              <span class="p-key">Date:</span>
+              <span class="p-value">{{moment-format
+                  (get value "0")
+                  "MM/DD/YYYY hhA z"
+                  timeZone=timezone
+                }}</span>
+            </div>
+            <div>
+              <span class="p-key">Occurrences:</span>
+              <span class="p-value">{{get value "1"}}</span>
+            </div>
+          </div>
+        {{/each}}
+      {{/each-in}}
+    </div>
+  {{else}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on
+        "click"
+        (action "toggleExpandableTitle" (concat "violations_over_time" index))
+      }}
+    >
+      <span class="text">Violations Over Time</span>
+      {{fa-icon "angle-down"}}
+    </a>
+  {{/if}}
+{{/if}}
+
+{{#if details.attacks_by_industry}}
+  {{#if (get expandableTitleStates (concat "attacks_by_industry" index))}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on "click" (action "toggleExpandableTitle" (concat "attacks_by_industry" index))}}
+    >
+      <span class="text">Attacks by Industry</span>
+      {{fa-icon "angle-up"}}
+    </a>
+    <div class="attacks_by_industry">
+      {{#each-in details.attacks_by_industry as |name percentage|}}
+        <div>
+          <span class="p-key">{{name}}:</span>
+          <span class="p-value">{{percentage}}</span>
+        </div>
+      {{/each-in}}
+    </div>
+  {{else}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on "click" (action "toggleExpandableTitle" (concat "attacks_by_industry" index))}}
+    >
+      <span class="text">Attacks by Industry</span>
+      {{fa-icon "angle-down"}}
+    </a>
+  {{/if}}
+{{/if}}
+
+{{#if details.client_application_details}}
+  {{#if (get expandableTitleStates (concat "client_application_details" index))}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on
+        "click"
+        (action "toggleExpandableTitle" (concat "client_application_details" index))
+      }}
+    >
+      <span class="text">Client Application Details</span>
+      {{fa-icon "angle-up"}}
+    </a>
+    <div class="client_application_details">
+      {{#each-in details.client_application_details as |title values|}}
+        <h2 class="mt-2">{{title}}</h2>
+        {{#each-in values as |name percentage|}}
+          <div>
+            <span class="p-key">{{name}}:</span>
+            <span class="p-value">{{percentage}}</span>
+          </div>
+        {{/each-in}}
+      {{/each-in}}
+    </div>
+  {{else}}
+    <a
+      href="#"
+      class="expandable-title"
+      {{on
+        "click"
+        (action "toggleExpandableTitle" (concat "client_application_details" index))
+      }}
+    >
+      <span class="text">Client Application Details</span>
+      {{fa-icon "angle-down"}}
+    </a>
+  {{/if}}
+{{/if}}
